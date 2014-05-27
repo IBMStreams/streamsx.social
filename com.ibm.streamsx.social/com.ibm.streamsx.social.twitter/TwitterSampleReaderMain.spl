@@ -1,0 +1,25 @@
+namespace com.ibm.streamsx.social.twitter;
+
+/**
+ * This composite reads the free twitter sample stream and writes the JSON tweets to a file
+ * See [https://dev.twitter.com/docs/api/1.1/get/statuses/sample]
+ */
+composite TwitterSampleReaderMain {
+	param
+		expression<rstring> $authenticationFile : getSubmissionTimeValue("authenticationFile");
+		expression<rstring> $outputFile : getSubmissionTimeValue("outputFile", "twitter_sample.json");
+	
+	graph
+		(stream<rstring jsonString> TwitterJSONStream; 
+		 stream<TweetType> TwitterParsedStream) = TwitterSampleReader()  {
+			param
+				authenticationFile : $authenticationFile;
+				disableParsing : true;
+		}
+		
+		() as SinkOp = FileSink(TwitterJSONStream) {
+			param
+				file : $outputFile;
+				quoteStrings : false;
+		}
+}

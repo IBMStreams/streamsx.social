@@ -1,0 +1,43 @@
+namespace com.ibm.streamsx.social.twitter;
+
+
+/**
+ * This composite is a base type that can be used to connect to most Twitter Streaming Endpoints  
+ */
+public composite TwitterStreamingReader( output TwitterJSONStream, TwitterParsedStream ) {
+	param
+		expression<rstring> $url ;
+		expression<rstring> $authenticationFile ;		
+		expression<boolean> $disableParsing : false;
+		
+	graph
+		stream<JsonType> TwitterJSONStream  
+			= com.ibm.streamsx.inet.http::HTTPGetStream() {
+			param
+				url : $url;
+				authenticationType : "oauth";
+				authenticationFile : $authenticationFile;
+				backoff : true;
+		}
+		
+		/**
+		 * Removes invalid JSON
+		 */
+		stream<JsonType> TwitterJSONFilteredStream 
+			= Custom(TwitterJSONStream) {
+			logic
+				onTuple TwitterJSONStream : {
+					if(! $disableParsing) {
+						rstring nJson = trim(TwitterJSONStream.jsonString, "\\s");
+						if( length(nJson) > 1) {
+							submit(TwitterJSONStream, TwitterJSONFilteredStream);
+						}
+					}
+				}
+		}
+		
+		stream<TweetType> TwitterParsedStream 
+			= com.ibm.streamsx.json::JSONToTuple(TwitterJSONStream) {
+		} 
+		
+}

@@ -1,0 +1,23 @@
+namespace com.ibm.streamsx.social.twitter;
+
+
+/**
+ * This composite reads the free twitter sample stream and produces a raw JSON stream and a 
+ * parsed [TweetType] stream matching the tweet structure.
+ * See [https://dev.twitter.com/docs/api/1.1/get/statuses/sample]
+ */
+public composite TwitterSampleReader( output TwitterJSONStream, TwitterParsedStream ) {
+	param
+		expression<rstring> $url : "https://stream.twitter.com/1.1/statuses/sample.json";
+		expression<rstring> $authenticationFile ;
+		expression<boolean> $disableParsing : false;
+		
+	graph
+		(stream<rstring jsonString> TwitterJSONStream; 
+		 stream<TweetType> TwitterParsedStream) = TwitterStreamingReader()  {
+			param
+				url : $url; 
+				authenticationFile : $authenticationFile;
+				disableParsing : $disableParsing;
+		}
+}
