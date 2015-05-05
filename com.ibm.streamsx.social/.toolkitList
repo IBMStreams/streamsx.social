@@ -1,0 +1,5 @@
+com.ibm.streamsx.social/1.0.0
+spl/1.1.0
+com.ibm.streamsx.inet/1.2.0.__dev__
+com.ibm.streamsx.json/1.0.0.__dev__
+tests/1.0.0

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+//
+// *******************************************************************************
+// * Copyright (C)2014, International Business Machines Corporation and *
+// * others. All Rights Reserved. *
+// *******************************************************************************
+//
+-->
+<project name="com.ibm.streamsx.social" basedir="." default="all">
+
+	<property environment="env" />
+	<property name="streams.install" value="${env.STREAMS_INSTALL}" />
+
+	<property name="src.dir" value="impl/java/src" />
+	<property name="build.dir" value="impl/java/classes" />
+	<property name="lib.dir" value="impl/lib" />
+	<property name="test.run.dir" value="tests" />
+	<property name="test.build.dir" value="${test.run.dir}/bin" />
+	
+
+	<target name="all" depends="cpp"/>
+	<target name="clean" depends="cpp-clean"/>
+	
+	<target name="cpp">
+		<exec executable="make" failonerror="true">
+	  </exec>
+	</target>
+
+	<target name="cpp-clean">
+		<exec executable="make" failonerror="true">
+			<arg value="clean"/>
+	  </exec>
+	</target>
+
+</project>
+
