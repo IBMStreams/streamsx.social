@@ -1,0 +1,54 @@
+
+/* Copyright (C) 2016, International Business Machines Corporation  */
+/* All Rights Reserved                                	            */
+namespace sample ;
+
+use com.ibm.streamsx.social.twitter::TwitterSendMessage ;
+
+stateful rstring generateMessage()
+{
+	mutable Sys.tm tm = {};
+	time(getTimestamp(), tm); 
+	rstring strTimestamp = strftime(tm, "%Y-%m-%d %H:%M:%S");
+	rstring hostName = getHostName() ;
+	rstring ipAddress = getIPAddress() ;
+	rstring emoticons = "☑ ✔ ✌ ☼ ♨ ✈ ♖ ✉ ☉  ❀ ♞ ☎ ✾  ♬ ♺ ✵ ♤ ";
+	rstring message = emoticons + strTimestamp + " This is a test message from Host=" +
+		hostName + " (" + ipAddress + ")" ;
+	return message ;
+}
+
+composite TwitterSendMessageTest
+{
+	param
+		expression<rstring> $recipient : "@XXXXXXX" ;
+	graph
+		
+		/**
+		 * CrateMessage is a Beacon operator and delivers two strings in OutputStreams 
+		 */		
+		stream<rstring recipient, rstring message> CrateMessage = Beacon()
+		{
+			param
+				initDelay : 1.0 ;
+				period : 20.0 ;
+				iterations : 2 ;
+			output
+				CrateMessage : recipient = $recipient, message = generateMessage() ;
+		}
+		
+		
+		/**
+		 * twitterSendMessage reads the Twitter Consumer Credentials from
+		 * twitter properties file and sends a message to a twitter recipient
+		 * The InputStreams has to contain to strings  recipient and message
+		 */
+		() as twitterSendMessage = TwitterSendMessage(CrateMessage)
+		{
+			param
+				propertiesFile : "etc/twitter.properties" ;
+		}
+
+}
+
+
