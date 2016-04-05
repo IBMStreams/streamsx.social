@@ -21,6 +21,7 @@ stateful rstring generateMessage()
 composite TwitterSendMessageTest
 {
 	param
+		// please change teh @XXXXXXX to your twitter flower for example @MyFreind
 		expression<rstring> $recipient : "@XXXXXXX" ;
 	graph
 		
