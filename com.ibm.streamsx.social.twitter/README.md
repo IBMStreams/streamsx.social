@@ -54,10 +54,11 @@ and compile the operator.
 	**Consumer Key** , **Consumer Secret** , **Access Token** and **Access Token Secret**
 
 # Download and compile the operator.
- - Download the streamsx.twitter-master.zip file from GitHub.
+ - Download the streamsx.social-master.zip file from GitHub.
  - Unzip it on your streams system. For example in /home/streamsadmin/workspace/streamsx.twitter-master
- - mv streamsx.twitter-master streamsx.twitter
- - Edit streamsx.twitter/etc/twitter.properties file and replace the xxxx with your Twitter credentials.
+ - mv streamsx.social-master streamsx.social
+ - Edit streamsx.social/com.ibm.streamsx.social.twitter/etc/twitter.properties file and replace  
+   the xxxx with your Twitter credentials.
 
          consumerKey=XXXXXXXXXXXXXXXXXXXXXXXXXxxxx
          consumerSecret=XXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -97,7 +98,7 @@ If you did all steps as described, you will get a message like this:
 
 
 
-     [jar] Building jar: /home/streamsadmin/workspace/TwitterSendMessage/impl/lib/com.ibm.streamsx.social.twitter.jar
+     [jar] Building jar: /home/streamsadmin/workspace/com.ibm.streamsx.social.twitter/impl/lib/com.ibm.streamsx.social.twitter.jar
      ....
      [exec]  [CXX-operator] CrateMessage
      [exec]  [CXX-operator] twitterSendMessage
