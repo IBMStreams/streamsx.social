@@ -1,0 +1,6 @@
+**/.apt_generated/
+/tmp/
+**/toolkit.xml
+/doc/
+/com.ibm.streamsx.social/doc/
+/com.ibm.streamsx.social/impl/lib/
