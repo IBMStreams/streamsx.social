@@ -1,0 +1,11 @@
+
+- Download the twitter4j package from: http://twitter4j.org/archive/twitter4j-4.0.4.zip
+   Please read carefully the license agreement and then download the twitter4j libraries.
+   Twitter4J is released under Apache License 2.0.
+   http://www.apache.org/licenses/LICENSE-2.0
+ - Unzip the twitter4j-4.0.4.zip and copy only the twitter4j-core-4.0.4.jar in this directory.
+   com.ibm.streamsx.social.twitter/lib
+   
+   $ cd com.ibm.streamsx.social.twitter/lib
+   $ unzip -j  /downloads/twitter4j-4.0.4.zip lib/twitter4j-core-4.0.4.jar`
+  
