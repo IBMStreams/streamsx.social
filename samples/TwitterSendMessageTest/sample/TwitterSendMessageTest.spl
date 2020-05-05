@@ -1,7 +1,7 @@
 
 /* Copyright (C) 2016, International Business Machines Corporation  */
 /* All Rights Reserved                                	            */
-namespace sample ;
+namespace sample;
 
 use com.ibm.streamsx.social.twitter::TwitterSendMessage ;
 
@@ -18,7 +18,7 @@ stateful rstring generateMessage()
 	return message ;
 }
 
-composite TwitterSendMessageTest
+public composite TwitterSendMessageTest
 {
 	param
 		// please change teh @XXXXXXX to your twitter flower for example @MyFreind
@@ -47,7 +47,7 @@ composite TwitterSendMessageTest
 		() as twitterSendMessage = TwitterSendMessage(CrateMessage)
 		{
 			param
-				propertiesFile : "etc/twitter.properties" ;
+				propertiesFile : getThisToolkitDir()+"/etc/twitter.properties" ;
 		}
 
 }

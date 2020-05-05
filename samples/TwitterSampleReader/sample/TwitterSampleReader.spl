@@ -1,5 +1,6 @@
-namespace com.ibm.streamsx.social.twitter;
+namespace sample;
 
+use com.ibm.streamsx.social.twitter::*;
 
 /**
  * This composite reads the free twitter sample stream and produces a raw JSON stream and a 
