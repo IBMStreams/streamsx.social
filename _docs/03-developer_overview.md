@@ -27,7 +27,7 @@ Download the full toolkit requires git. Enter a directory of your choice and exe
 These steps must be run on the Streams server (or the Streams Quick Start Edition) and require the Ant and Maven tools. Additionally, environment variable M2_HOME must be set to the Maven home directory.
 * Set the Streams environment variables by sourcing the `streamsprofile.sh` script which can be found in the Streams installation `bin` directory
 * Set environment variable `M2_HOME` to the Maven home directory; if you build the toolkit on a Streams QSE image, Maven is already installed and M2_HOME set
-* Go to the toolkit's main directory that holds the `build.xml` file, for example: `cd /yourDirectory/streamsx.cloudant`
+* Go to the toolkit's main directory that holds the `build.xml` file, for example: `cd /yourDirectory/streamsx.social`
 * Run `ant`
 * To check out more targets of the build script run: `ant -p`
 
